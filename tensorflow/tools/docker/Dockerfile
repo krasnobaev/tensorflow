@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         rsync \
         software-properties-common \
         unzip \
+        xvfb \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -66,4 +67,4 @@ EXPOSE 8888
 
 WORKDIR "/notebooks"
 
-CMD ["/run_jupyter.sh", "--allow-root"]
+CMD ["xvfb-run" "-s", "\"-screen 0 1400x900x24\"", "/run_jupyter.sh", "--allow-root"]
